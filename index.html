@@ -9,14 +9,20 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const heading = <h3>Hello React JS!</h3>;
-    const btn = (
+    const Title = () => <h3>Hello React JS!</h3>;
+    const Btn = () => (
       <button onClick={() => console.log("clicked")} style={{ backgroundColor: "aqua" }}>
         Click Me
       </button>
     );
-    const container = React.createElement("div", null, [heading, btn]);
+    const Container = () => (
+      <div>
+        <Title />
+        <Btn />
+      </div>
+    );
+    //변수들 함수로 바꾸고, JSX룰에 따라 html태그처럼 각 함수를 넣을수있다. (주의!) 요소는 대문자로 쓸것
+    ReactDOM.render(<Container />, root);
     //RENDERING
-    ReactDOM.render(container, root);
   </script>
 </html>
