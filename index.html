@@ -3,21 +3,23 @@
   <body>
     <div id="root"></div>
   </body>
-  <!-- react와 react-dom을 import하면 react를 쓸수있음!  -->
-  <!-- react는 엔진, react-dom은 library(package) -->
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script>
     const root = document.getElementById("root");
-    //reactJs는 html을 작성하지 않음 (root가 거의 처음이자 마지막 html이 될거임)
-    const span = React.createElement(
-      "span",
-      { id: "sexy-span", style: { color: "blue", fontWeight: "bold" } },
-      "Hello React Js!"
+    const heading = React.createElement("h3", null, "Hello React Js!");
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => {
+          console.log("clicked");
+        },
+        style: { backgroundColor: "aqua" },
+      },
+      "Click Me"
     );
-    ReactDOM.render(span, root); //span -> root에 넣어서 render하겠다.
-
-    //!! 바닐라js가 html을 먼저 만들고 -> js에서 찾음다음 -> js코드를 만들었다면,
-    //!! 리액트js는 js를 먼저 만들고 -> html을 만드는 형식이다. (바닐라와 거꾸로라고 보면 된다.)
+    //property에 addEvent를 넣을수있다!
+    const container = React.createElement("div", null, [heading, btn]);
+    ReactDOM.render(container, root);
   </script>
 </html>
