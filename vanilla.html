@@ -1,0 +1,18 @@
+<!-- react로 짠 코드와 후에 비교할것! -->
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <span>Total clicks: 0</span>
+    <button id="btn">click me</button>
+  </body>
+  <script>
+    let counter = 0;
+    const button = document.getElementById("btn");
+    const span = document.querySelector("span");
+    button.addEventListener("click", handleClick);
+    function handleClick() {
+      counter = counter + 1;
+      span.innerText = `Total clicks: ${counter}`;
+    }
+  </script>
+</html>
