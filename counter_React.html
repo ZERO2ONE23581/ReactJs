@@ -1,0 +1,35 @@
+<!-- vanillaJS와 비교 -->
+<!DOCTYPE html>
+<html lang="ko">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- JSX를 이용하기 위해 바벨을 이용한다. -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    //rendering
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+    function App() {
+      //setState
+      const [counter, setCounter] = React.useState(0);
+
+      const onClick = () => {
+        setCounter(counter + 1);
+        //modifier는 "rendering과정 필요없이!" counter를 변환해준다!
+      };
+
+      return (
+        //html소환
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={onClick}>Click Me</button>
+        </div>
+      );
+    }
+    //html을 불러와 변수에 담고, 이벤트리스너를 붙이는 등 과정이 리액트를 쓰면 함수하나로 완성됨.
+  </script>
+</html>
