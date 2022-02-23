@@ -1,3 +1,4 @@
+<!-- vanillaJS와 비교 -->
 <!DOCTYPE html>
 <html lang="ko">
   <body>
@@ -9,20 +10,28 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const Title = () => <h3>Hello React JS!</h3>;
-    const Btn = () => (
-      <button onClick={() => console.log("clicked")} style={{ backgroundColor: "aqua" }}>
-        Click Me
-      </button>
-    );
-    const Container = () => (
-      <div>
-        <Title />
-        <Btn />
-      </div>
-    );
-    //변수들 함수로 바꾸고, JSX룰에 따라 html태그처럼 각 함수를 넣을수있다. (주의!) 요소는 대문자로 쓸것
-    ReactDOM.render(<Container />, root);
-    //RENDERING
+    //Not the best way but still.. it works!
+    let counter = 0;
+
+    function Container() {
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={countUp}>Click Me</button>
+        </div>
+      );
+    }
+
+    function countUp() {
+      counter = counter + 1;
+      //UI rendering
+      //vanillaJs와 비교해보면 숫자가 카운터될때 UI 부분만 바뀌는것을 확일할수있다! (리액트의 강점! 바꿀 부분만 인식함)
+      render();
+    }
+
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+    render(); //RENDERING
   </script>
 </html>
