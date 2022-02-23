@@ -10,28 +10,18 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    //Not the best way but still.. it works!
-    let counter = 0;
 
-    function Container() {
+    function App() {
+      const [counter, modifier] = React.useState(666); //[첫번째 value, value를 요소로 하는 함수]
+
       return (
         <div>
           <h3>Total clicks: {counter}</h3>
-          <button onClick={countUp}>Click Me</button>
+          <button>Click Me</button>
         </div>
       );
     }
 
-    function countUp() {
-      counter = counter + 1;
-      //UI rendering
-      //vanillaJs와 비교해보면 숫자가 카운터될때 UI 부분만 바뀌는것을 확일할수있다! (리액트의 강점! 바꿀 부분만 인식함)
-      render();
-    }
-
-    function render() {
-      ReactDOM.render(<Container />, root);
-    }
-    render(); //RENDERING
+    ReactDOM.render(<App />, root);
   </script>
 </html>
