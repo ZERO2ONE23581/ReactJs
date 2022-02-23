@@ -9,19 +9,27 @@
   <!-- JSX를 이용하기 위해 바벨을 이용한다. -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
+    //rendering
     const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
 
     function App() {
-      const [counter, modifier] = React.useState(666); //[첫번째 value, value를 요소로 하는 함수]
+      //setState
+      const [counter, setCounter] = React.useState(0);
+
+      const onClick = () => {
+        setCounter(counter + 1);
+        //modifier는 "rendering과정 필요없이!" counter를 변환해준다!
+      };
 
       return (
+        //html소환
         <div>
           <h3>Total clicks: {counter}</h3>
-          <button>Click Me</button>
+          <button onClick={onClick}>Click Me</button>
         </div>
       );
     }
-
-    ReactDOM.render(<App />, root);
+    //html을 불러와 변수에 담고, 이벤트리스너를 붙이는 등 과정이 리액트를 쓰면 함수하나로 완성됨.
   </script>
 </html>
