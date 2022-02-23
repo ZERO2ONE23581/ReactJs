@@ -3,15 +3,19 @@
 <html lang="ko">
   <body>
     <div id="root"></div>
+    <script
+      src="https://kit.fontawesome.com/1d681e26c5.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <!-- JSX를 이용하기 위해 바벨을 이용한다. -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function App() {
+    function MinutesToHours() {
       const [amount, setAmount] = React.useState();
-      const [flipped, setFlipped] = React.useState(false);
+      const [inverted, setInverted] = React.useState(false);
 
       const onChange = (event) => {
         setAmount(event.target.value); //minutes = value
@@ -19,38 +23,63 @@
       const reset = () => setAmount(""); //the value goes back to 0
       const onFlip = () => {
         reset();
-        setFlipped((current) => !current);
+        setInverted((current) => !current);
       };
 
       return (
         <div>
-          <h1>Super Converter</h1>
           <div>
             <label htmlFor="minutes">When you put minutes here: </label>
             <input
-              value={flipped ? Math.round(amount * 60) : amount}
+              value={inverted ? Math.round(amount * 60) : amount}
               id="minutes"
               type="number"
               placeholder="Minutes"
               onChange={onChange}
-              disabled={flipped === true} //if flipped is true, it will be disabled
+              disabled={inverted === true} //if inverted is true, it will be disabled
             />
             minutes
           </div>
           <div>
             <label htmlFor="hours">it will be converted to rounded </label>
             <input
-              value={flipped ? amount : Math.round(amount / 60)}
+              value={inverted ? amount : Math.round(amount / 60)}
               id="hours"
               type="number"
               placeholder="Hours"
               onChange={onChange}
-              disabled={flipped === false}
+              disabled={inverted === false}
             />
             hours
           </div>
           <button onClick={reset}>Reset</button>
-          <button onClick={onFlip}>Flip</button>
+          <button onClick={onFlip}>{inverted ? "hours to mins" : "mins to hours"}</button>
+        </div>
+      );
+    }
+
+    function KmToMiles() {
+      return <h3>Km to Miles</h3>;
+    }
+
+    function App() {
+      //swtich function
+      const [index, setIndex] = React.useState("x");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="x">Select your units</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Kilometers & Miles</option>
+          </select>
+          <hr />
+          {index === "x" ? "Please select your units" : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
         </div>
       );
     }
