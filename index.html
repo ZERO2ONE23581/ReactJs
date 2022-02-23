@@ -12,23 +12,35 @@
     function App() {
       const [minutes, setMinutes] = React.useState();
       const onChange = (event) => {
-        console.log(event.target.value);
-        setMinutes(event.target.value);
+        setMinutes(event.target.value); //minutes = value
       };
+      const reset = () => setMinutes(""); //the value goes back to 0
       return (
         <div>
           <h1>Super Converter</h1>
-          <label htmlFor="minutes">Minutes</label>
-          <input
-            value={minutes}
-            id="minutes"
-            type="number"
-            placeholder="Minutes"
-            onChange={onChange}
-          />
-          <h4>You want to convert {minutes} mins</h4>
-          <label htmlFor="hours">Hours</label>
-          <input id="hours" type="number" placeholder="Hours" />
+          <div>
+            <label htmlFor="minutes">When you put minutes here: </label>
+            <input
+              value={minutes}
+              id="minutes"
+              type="number"
+              placeholder="Minutes"
+              onChange={onChange} //update the value
+            />
+            minutes
+          </div>
+          <div>
+            <label htmlFor="hours">it will be converted to rounded </label>
+            <input
+              value={Math.round(minutes / 60)}
+              id="hours"
+              type="number"
+              placeholder="Hours"
+              disabled
+            />
+            hours
+          </div>
+          <button onClick={reset}>Reset</button>
         </div>
       );
     }
