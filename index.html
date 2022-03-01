@@ -14,33 +14,40 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     //Components
-    function Btn({ tomato, big }) {
-      console.log({ tomato }); // {tomatmo:"first tomato"}, {tomatmo:"second tomato"}
-      console.log({ big });
+    function Btn({ text, onClick }) {
+      console.log(text, "was rendered");
       return (
         <button
+          onClick={onClick}
           style={{
-            backgroundColor: big ? "red" : "tomato",
+            backgroundColor: "tomato",
             color: "white",
+            cursor: "pointer",
             padding: "10px 20px",
             border: "none",
             borderRadius: 10,
             marginRight: "5px",
-            fontSize: big ? "20px" : "15px",
           }}
         >
-          {tomato}
+          {text}
         </button>
       );
     }
-
+    /* React Memo */
+    // if the props don't change, don't need to render. => if there is many, it could slow your application.
+    const MemorizedBtn = React.memo(Btn);
     //Components inside of JSX
     function App() {
-      //this rendering Btn twice each
+      const [value, setValue] = React.useState("Save");
+      const changeValue = () => {
+        setValue("Revert");
+      };
+      //text, onclick are just props inside JSX here,
+      //to use them you should import them as arguments in the Btn component.
       return (
         <div>
-          <Btn tomato="Big tomato" big={true} />
-          <Btn tomato="Small tomato" big={false} />
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="Confirm" />
         </div>
       );
     }
