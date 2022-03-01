@@ -11,119 +11,41 @@
   </body>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <!-- JSX를 이용하기 위해 바벨을 이용한다. -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
+    //Components
+    function Btn({ tomato, big }) {
+      console.log({ tomato }); // {tomatmo:"first tomato"}, {tomatmo:"second tomato"}
+      console.log({ big });
+      return (
+        <button
+          style={{
+            backgroundColor: big ? "red" : "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: "none",
+            borderRadius: 10,
+            marginRight: "5px",
+            fontSize: big ? "20px" : "15px",
+          }}
+        >
+          {tomato}
+        </button>
+      );
+    }
+
+    //Components inside of JSX
+    function App() {
+      //this rendering Btn twice each
+      return (
+        <div>
+          <Btn tomato="Big tomato" big={true} />
+          <Btn tomato="Small tomato" big={false} />
+        </div>
+      );
+    }
     // Rendering
     const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
-
-    function App() {
-      const [index, setIndex] = React.useState("x");
-      const onChange = (event) => {
-        console.log(event.target.value);
-        setIndex(event.target.value); // input value -> index -> html
-      };
-      return (
-        <div>
-          <h1>Sexy Converter</h1>
-          <select value={index} onChange={onChange}>
-            <option value="x">Select your units.</option>
-            <option value="0">Minutes to Hours</option>
-            <option value="1">Km to Miles</option>
-          </select>
-          <br />
-          {index === "0" ? <TimeConverter /> : null}
-          {index === "1" ? <DistConverter /> : null}
-        </div>
-      );
-    }
-    function TimeConverter() {
-      const [amount, setAmount] = React.useState();
-      const [invert, setInvert] = React.useState(false); //initial invert ==false
-      const onChange = (event) => {
-        setAmount(event.target.value);
-      };
-      const onReset = () => {
-        setAmount("");
-      };
-      const onInvert = () => {
-        onReset();
-        setInvert((state) => !state);
-      };
-      return (
-        <div>
-          <h3>Time converter</h3>
-          <label htmlFor="minutes">Minutes: </label>
-          <input
-            min="0"
-            value={invert ? Math.round(amount * 60) : amount}
-            onChange={onChange}
-            id="minutes"
-            type="number"
-            placeholder="Minutes"
-            disabled={invert}
-          />
-          mins
-          <br />
-          <label htmlFor="hours">Hours: </label>
-          <input
-            min="0"
-            value={invert ? amount : Math.round(amount / 60)}
-            onChange={onChange}
-            id="hours"
-            type="number"
-            placeholder="Hours"
-            disabled={!invert}
-          />
-          hrs
-          <br />
-          <button onClick={onInvert}>{invert ? "Mins to Hours" : "Hours to Mins"}</button>
-        </div>
-      );
-    }
-    function DistConverter() {
-      const [amount, setAmount] = React.useState();
-      const onChange = (event) => {
-        setAmount(event.target.value); //input value -> amount -> html
-      };
-      const onReset = () => {
-        setAmount("");
-      };
-      const [invert, setInvert] = React.useState(false);
-      const onInvert = (event) => {
-        onReset();
-        setInvert((state) => !state);
-      };
-      return (
-        <div>
-          <h3>Distance converter</h3>
-          <label for="km">Kilometers: </label>
-          <input
-            disabled={invert}
-            value={invert ? amount * 1.6 : amount}
-            onChange={onChange}
-            id="km"
-            type="number"
-            placeholder="kilometers"
-          />
-          km
-          <br />
-          <label for="miles">Miles: </label>
-          <input
-            disabled={!invert}
-            value={invert ? amount : amount * 0.6}
-            onChange={onChange}
-            id="miles"
-            type="number"
-            placeholder="miles"
-          />
-          miles
-          <br />
-          <br />
-          <button onClick={onInvert}>{invert ? "Miles to Km" : "Km to Miles"}</button>
-        </div>
-      );
-    }
   </script>
 </html>
